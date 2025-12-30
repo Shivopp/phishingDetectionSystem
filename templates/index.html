@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PhishGuard AI - Enterprise Threat Detection</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .gradient-bg {
+            background: linear-gradient(-45deg, #0f172a, #1e3a8a, #0f172a, #312e81);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+        }
+        .glass {
+            background: rgba(30, 41, 59, 0.5);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(71, 85, 105, 0.5);
+        }
+    </style>
+</head>
+<body class="gradient-bg min-h-screen text-white">
+    <div class="container mx-auto px-4 py-8">
+        <!-- Header -->
+        <div class="flex items-center justify-between mb-8">
+            <div class="flex items-center gap-4">
+                <div class="bg-gradient-to-r from-blue-500 to-purple-600 p-4 rounded-xl">
+                    <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                    </svg>
+                </div>
+                <div>
+                    <h1 class="text-4xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+                        PhishGuard AI
+                    </h1>
+                    <p class="text-slate-400">Enterprise Threat Detection System</p>
+                </div>
+            </div>
+            <div class="glass rounded-lg px-4 py-2 flex items-center gap-2">
+                <div class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                <span class="text-green-400 text-sm font-medium" id="status">System Active</span>
+            </div>
+        </div>
+
+        <!-- Stats -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+            <div class="glass rounded-xl p-6">
+                <div class="text-3xl font-bold mb-2">12,847</div>
+                <div class="text-slate-400">Threats Blocked</div>
+            </div>
+            <div class="glass rounded-xl p-6">
+                <div class="text-3xl font-bold mb-2">3,492</div>
+                <div class="text-slate-400">Scans Today</div>
+            </div>
+            <div class="glass rounded-xl p-6">
+                <div class="text-3xl font-bold mb-2">99.2%</div>
+                <div class="text-slate-400">Detection Rate</div>
+            </div>
+            <div class="glass rounded-xl p-6">
+                <div class="text-3xl font-bold mb-2">0.3s</div>
+                <div class="text-slate-400">Avg Response</div>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <!-- Main Panel -->
+            <div class="lg:col-span-2 glass rounded-xl p-6">
+                <h2 class="text-2xl font-bold mb-6">Threat Detection</h2>
+
+                <!-- URL Analysis -->
+                <div class="mb-8">
+                    <h3 class="text-lg font-semibold mb-4 flex items-center gap-2">
+                        <svg class="w-5 h-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"></path>
+                        </svg>
+                        URL Analysis
+                    </h3>
+                    <div class="flex gap-2">
+                        <input type="text" id="urlInput" placeholder="Enter URL to analyze..."
+                            class="flex-1 bg-slate-900/50 border border-slate-700 rounded-lg px-4 py-3 focus:outline-none focus:border-blue-500">
+                        <button onclick="analyzeURL()" 
+                            class="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 px-8 py-3 rounded-lg font-medium">
+                            Scan
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Email Analysis -->
+                <div class="mb-8">
+                    <h3 class="text-lg font-semibold mb-4 flex items-center gap-2">
+                        <svg class="w-5 h-5 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                        </svg>
+                        Email Analysis
+                    </h3>
+                    <textarea id="emailInput" placeholder="Paste email content here..."
+                        class="w-full bg-slate-900/50 border border-slate-700 rounded-lg px-4 py-3 focus:outline-none focus:border-purple-500 h-32 resize-none mb-2"></textarea>
+                    <button onclick="analyzeEmail()" 
+                        class="bg-gradient-to-r from-purple-500 to-pink-600 hover:from-purple-600 hover:to-pink-700 px-8 py-3 rounded-lg font-medium">
+                        Analyze Email
+                    </button>
+                </div>
+
+                <!-- Results -->
+                <div id="results" class="hidden"></div>
+            </div>
+
+            <!-- Sidebar -->
+            <div class="glass rounded-xl p-6">
+                <h3 class="text-lg font-semibold mb-4">Recent Threats</h3>
+                <div class="space-y-3">
+                    <div class="bg-slate-900/50 rounded-lg p-3">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-xs px-2 py-1 bg-red-500/20 text-red-400 rounded">CRITICAL</span>
+                            <span class="text-xs text-slate-500">2 min ago</span>
+                        </div>
+                        <div class="text-sm font-medium">Credential Phishing</div>
+                        <div class="text-xs text-slate-400">Email</div>
+                    </div>
+                    <div class="bg-slate-900/50 rounded-lg p-3">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-xs px-2 py-1 bg-orange-500/20 text-orange-400 rounded">HIGH</span>
+                            <span class="text-xs text-slate-500">15 min ago</span>
+                        </div>
+                        <div class="text-sm font-medium">Domain Spoofing</div>
+                        <div class="text-xs text-slate-400">URL</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_URL = 'http://localhost:5000/api';
+
+        async function analyzeURL() {
+            const url = document.getElementById('urlInput').value;
+            if (!url) return;
+
+            showLoading();
+            try {
+                const response = await fetch(`${API_URL}/analyze/url`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ url })
+                });
+                const data = await response.json();
+                displayResults(data);
+            } catch (error) {
+                showError(error.message);
+            }
+        }
+
+        async function analyzeEmail() {
+            const content = document.getElementById('emailInput').value;
+            if (!content) return;
+
+            showLoading();
+            try {
+                const response = await fetch(`${API_URL}/analyze/email`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ content })
+                });
+                const data = await response.json();
+                displayResults(data);
+            } catch (error) {
+                showError(error.message);
+            }
+        }
+
+        function displayResults(data) {
+            const resultsDiv = document.getElementById('results');
+            const verdictColor = data.verdict === 'safe' ? 'green' : 
+                                data.verdict === 'suspicious' ? 'yellow' : 'red';
+            
+            resultsDiv.innerHTML = `
+                <div class="border-2 border-${verdictColor}-500/50 bg-${verdictColor}-500/10 rounded-xl p-6">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="text-3xl font-bold capitalize text-${verdictColor}-400">${data.verdict}</div>
+                        <div class="text-xl text-slate-400">Score: ${data.score}%</div>
+                    </div>
+                    <div class="space-y-2">
+                        <h4 class="font-semibold">Analysis Details:</h4>
+                        ${Object.entries(data.features || {}).map(([key, value]) => `
+                            <div class="flex justify-between bg-slate-900/50 rounded p-2">
+                                <span>${key}</span>
+                                <span class="font-medium">${value}</span>
+                            </div>
+                        `).join('')}
+                    </div>
+                    ${data.threats && data.threats.length > 0 ? `
+                        <div class="mt-4">
+                            <h4 class="font-semibold text-red-400 mb-2">Detected Threats:</h4>
+                            ${data.threats.filter(t => t).map(t => `
+                                <div class="text-sm text-red-300">⚠️ ${t}</div>
+                            `).join('')}
+                        </div>
+                    ` : ''}
+                </div>
+            `;
+            resultsDiv.classList.remove('hidden');
+        }
+
+        function showLoading() {
+            document.getElementById('results').innerHTML = `
+                <div class="text-center py-8">
+                    <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500 mx-auto"></div>
+                    <p class="mt-4 text-slate-400">Analyzing...</p>
+                </div>
+            `;
+            document.getElementById('results').classList.remove('hidden');
+        }
+
+        function showError(message) {
+            document.getElementById('results').innerHTML = `
+                <div class="bg-red-500/10 border border-red-500/50 rounded-xl p-6">
+                    <div class="text-red-400 font-semibold">Error: ${message}</div>
+                </div>
+            `;
+        }
+    </script>
+</body>
+</html>
