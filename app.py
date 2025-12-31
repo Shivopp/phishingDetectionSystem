@@ -20,7 +20,7 @@ import plotly.express as px
 from datetime import datetime
 import math
 import json
-
+import os
 # ============================================
 # PAGE CONFIGURATION
 # ============================================
@@ -1346,4 +1346,5 @@ def main():
     """, unsafe_allow_html=True)
 
 if __name__ == "__main__":
-    main()
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host='0.0.0.0', port=port)
